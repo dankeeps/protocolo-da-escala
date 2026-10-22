@@ -1,0 +1,5 @@
+# só a página publicada vai pro GitHub; versões de teste ficam locais
+*
+!.gitignore
+!index.html
+!expert.webp
