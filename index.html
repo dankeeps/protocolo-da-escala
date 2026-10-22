@@ -5,10 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Protocolo da Escala</title>
 <meta name="description" content="O método que fez uma oferta faturar 1 milhão de reais com ROAS acima de 2.30.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:,">
+<!-- carregamento rápido: fonte e foto do expert começam a baixar antes de tudo -->
+<link rel="preload" href="fontes/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="expert-840.webp" imagesrcset="expert-560.webp 560w, expert-840.webp 840w, expert-1254.webp 1254w" imagesizes="(max-width: 860px) 118vw, 720px" fetchpriority="high">
 <style>
+  /* Inter Tight hospedada junto com a página: só pesos 400–700 e só os caracteres usados (17 KB) */
+  @font-face {
+    font-family: "Inter Tight"; font-style: normal; font-weight: 400 700; font-display: swap;
+    src: url("fontes/inter-tight.woff2") format("woff2");
+  }
   :root {
     --bg: #000;
     --destaque: #2559e0;
@@ -34,11 +41,12 @@
   }
 
   /* halos azuis: círculos sólidos desfocados */
-  .halo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(130px); }
-  .halo-1 { width: 480px; height: 480px; background: var(--destaque); opacity: .12; top: -80px; left: -220px; }
-  .halo-2 { width: 460px; height: 460px; background: var(--destaque); opacity: .08; bottom: -220px; right: -160px; }
-  .halo-3 { width: 420px; height: 420px; background: var(--destaque); opacity: .06; top: -200px; right: -180px; }
-  .halo-4 { width: 420px; height: 420px; background: var(--destaque); opacity: .06; bottom: -200px; left: -180px; }
+  .halo { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; transform: scale(1.8);
+    background: radial-gradient(closest-side, rgb(37 89 224) 0%, rgb(37 89 224 / .5) 45%, rgb(37 89 224 / 0) 100%); }
+  .halo-1 { width: 480px; height: 480px; opacity: .12; top: -80px; left: -220px; }
+  .halo-2 { width: 460px; height: 460px; opacity: .08; bottom: -220px; right: -160px; }
+  .halo-3 { width: 420px; height: 420px; opacity: .06; top: -200px; right: -180px; }
+  .halo-4 { width: 420px; height: 420px; opacity: .06; bottom: -200px; left: -180px; }
   /* fundo de "código hacker": texto bem apagado, preenchido por JS. Nítido fora da caixa, levemente desfocado através do vidro */
   .textura {
     position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
@@ -75,15 +83,16 @@
   /* manchas de luz atrás da caixa: é o que o vidro desfoca */
   .hero::before, .hero::after {
     content: ""; position: absolute; border-radius: 50%; pointer-events: none; z-index: -1;
-    background: var(--destaque); filter: blur(55px);
+    transform: scale(1.5);
+    background: radial-gradient(closest-side, rgb(37 89 224) 0%, rgb(37 89 224 / .5) 45%, rgb(37 89 224 / 0) 100%);
   }
   /* brilho azul centrado em dois cantos opostos da caixa (em cima à esquerda, embaixo à direita):
      metade fica fora e metade passa pelo vidro, e isso desenha a beirada da caixa */
   .hero::before { width: 280px; height: 280px; left: calc(16px - 140px); top: calc(36px - 140px); opacity: .32; }
   .hero::after { width: 280px; height: 280px; right: calc(16px - 140px); bottom: calc(36px - 140px); opacity: .28; }
   @media (max-width: 860px) {
-    .hero::before { width: 200px; height: 200px; left: calc(12px - 100px); top: calc(14px - 100px); filter: blur(45px); }
-    .hero::after { width: 200px; height: 200px; right: calc(12px - 100px); bottom: calc(16px - 100px); filter: blur(45px); }
+    .hero::before { width: 200px; height: 200px; left: calc(12px - 100px); top: calc(14px - 100px); }
+    .hero::after { width: 200px; height: 200px; right: calc(12px - 100px); bottom: calc(16px - 100px); }
   }
   /* caixa de vidro que envolve texto + expert */
   .painel {
@@ -203,7 +212,7 @@
   @media (max-width: 860px) {
     .topo { padding: 14px 12px; }
     .topo p { font-size: 12px; letter-spacing: .18em; }
-    .halo-1 { width: 360px; height: 360px; top: -200px; left: -160px; filter: blur(100px); }
+    .halo-1 { width: 360px; height: 360px; top: -200px; left: -160px; }
 
     .foto img { width: 118%; margin-left: -9%; }
     .hero { padding: 14px 12px 16px; min-height: 0; }
@@ -262,7 +271,7 @@
     </div>
 
     <div class="foto entra d2">
-      <img src="expert.webp" alt="Expert do Protocolo da Escala" width="1254" height="1254">
+      <img src="expert-840.webp" srcset="expert-560.webp 560w, expert-840.webp 840w, expert-1254.webp 1254w" sizes="(max-width: 860px) 118vw, 720px" alt="Expert do Protocolo da Escala" width="1254" height="1254" fetchpriority="high" decoding="async">
       <div class="chip chip-1 vidro">
         <div class="chip-icone"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
         <div class="chip-txt"><b>ROAS 2.30+</b><span>na escala</span></div>

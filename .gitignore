@@ -2,4 +2,8 @@
 *
 !.gitignore
 !index.html
-!expert.webp
+!expert-560.webp
+!expert-840.webp
+!expert-1254.webp
+!fontes/
+!fontes/inter-tight.woff2
